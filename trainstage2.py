@@ -19,7 +19,7 @@ def train(args):
 
     # load dataset for train and eval
     # train_dataset = CIFAR10(root='dataset', train=True, transform=config.train_transform, download=True)
-    train_dataset = loaddataset.PreMyDatasetStage2(transform=config.my_train_transform)  # 这个地方不确定，增强可以增加鲁棒性
+    train_dataset = loaddataset.PreMyDatasetStage2(transform=config.my_test_transform)  # 这个地方不确定，增强可以增加鲁棒性
     # my_test_transform是针对原始图片进行调整，my_train_transform是对图片进行增强
 
     train_data = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, num_workers=4, pin_memory=True)

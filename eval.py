@@ -17,7 +17,7 @@ def eval(args):
         DEVICE = torch.device("cpu")
 
     # eval_dataset = CIFAR10(root='dataset', train=False, transform=config.test_transform, download=True)
-    eval_dataset = datasets.ImageFolder(root='dataset/val', transform=config.my_test_transform)  # 尺寸变化得到原图
+    eval_dataset = datasets.ImageFolder(root='dataset/val', transform=config.my_train_transform)  # 尺寸变化得到原图
     eval_data = torch.utils.data.DataLoader(eval_dataset, batch_size=args.batch_size, shuffle=False, num_workers=16)
 
     model = net.SimCLRStage2(num_class=len(eval_dataset.classes)).to(DEVICE)
