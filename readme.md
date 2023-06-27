@@ -25,7 +25,7 @@ python trainstage1.py  # 运行上游任务
 python trainstage2.py --batch_size 128
 ```
 
-eval过程
+eval过程，注意加载eval_dataset的时候，需要选择何种transform方法
 ```bash
 # 修改config.py中的pre_model_state2的路径
 python eval.py
