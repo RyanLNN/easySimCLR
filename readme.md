@@ -22,7 +22,7 @@ python showbyvisdom.py
 python trainstage1.py  # 运行上游任务
 
 # 修改config.py中的pre_model路径，选择loss最小的那个。
-python trainstage2.py --batch_size 128
+python trainstage2.py (--batch_size 128 --max_epoch 100)
 ```
 
 eval过程，注意加载eval_dataset的时候，需要选择何种transform方法
