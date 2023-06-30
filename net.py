@@ -53,7 +53,7 @@ class Loss(torch.nn.Module):
     def __init__(self):
         super(Loss, self).__init__()
 
-    def forward(self, out_1, out_2, batch_size, temperature=2):
+    def forward(self, out_1, out_2, batch_size, temperature=0.05):
         # 分母 ：X.X.T，再去掉对角线值，分析结果一行，可以看成它与除了这行外的其他行都进行了点积运算（包括out_1和out_2）,
         # 而每一行为一个batch的一个取值，即一个输入图像的特征表示，
         # 因此，X.X.T，再去掉对角线值表示，每个输入图像的特征与其所有输出特征（包括out_1和out_2）的点积，用点积来衡量相似性

@@ -32,7 +32,7 @@ def train(args):
     optimizer = torch.optim.Adam(model.fc.parameters(), lr=1e-3, weight_decay=1e-6)  # 优化器只对fc层的参数进行修改
 
     os.makedirs(config.save_path, exist_ok=True)
-    for epoch in range(1, args.max_epoch + 1):
+    for epoch in range(args.max_epoch):
         model.train()
         total_loss = 0
         for batch, (data, target) in enumerate(train_data):
@@ -51,9 +51,10 @@ def train(args):
         with open(os.path.join(config.save_path, "stage2_loss.txt"), "a") as f:
             f.write(str(total_loss / len(train_dataset) * args.batch_size) + " ")
 
-        if epoch % 5 == 0:
+        if epoch % 10 == 0 and epoch != 0:
             torch.save(model.state_dict(), os.path.join(config.save_path, 'model_stage2_epoch' + str(epoch) + '.pth'))
 
+        if epoch % 2 == 0:
             model.eval()
             with torch.no_grad():
                 print("batch", " " * 1, "top1 acc", " " * 1, "top2 acc")
