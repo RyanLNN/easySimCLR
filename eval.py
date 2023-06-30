@@ -58,7 +58,7 @@ def eval(args):
               "acc: {:02.3f}%".format(acc * 100),
               "precision: {:02.3f}%".format(precision * 100),
               "recall: {:02.3f}%".format(recall * 100),
-              "f1: {:02.3f}%".format(f1 * 100))
+              "f1: {:02.3f}".format(f1 * 100))
 
 
 if __name__ == '__main__':
