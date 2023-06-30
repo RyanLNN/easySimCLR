@@ -2,7 +2,7 @@
 import argparse
 import torch
 from torchvision import datasets
-from torchvision.datasets import CIFAR10
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
 import config
 import loaddataset
@@ -25,6 +25,8 @@ def eval(args):
     # total_correct_1, total_correct_5, total_num, data_bar = 0.0, 0.0, 0.0, 0, tqdm(eval_data)
     total_correct_1, total_correct_2, total_num = 0.0, 0.0, 0.0
 
+    all_predictions, all_targets = [], []
+
     model.eval()
     with torch.no_grad():
         print("batch", " " * 1, "top1 acc", " " * 1, "top2 acc")
@@ -39,11 +41,24 @@ def eval(args):
             total_correct_1 += top1_acc
             total_correct_2 += top2_acc
 
+            all_predictions.extend(prediction[:, 0:1].cpu().numpy())
+            all_targets.extend(target.cpu().numpy())
+
             print("  {:02}  ".format(batch + 1), " {:02.3f}%  ".format(top1_acc / data.size(0) * 100),
                   "{:02.3f}%  ".format(top2_acc / data.size(0) * 100))
 
         print("all eval dataset:", "top1 acc: {:02.3f}%".format(total_correct_1 / total_num * 100),
               "top2 acc:{:02.3f}%".format(total_correct_2 / total_num * 100))
+        acc = accuracy_score(all_targets, all_predictions)
+        precision = precision_score(all_targets, all_predictions, average='macro')
+        recall = recall_score(all_targets, all_predictions, average='macro')
+        f1 = f1_score(all_targets, all_predictions, average='macro')
+
+        print("all eval dataset:",
+              "acc: {:02.3f}%".format(acc * 100),
+              "precision: {:02.3f}%".format(precision * 100),
+              "recall: {:02.3f}%".format(recall * 100),
+              "f1: {:02.3f}%".format(f1 * 100))
 
 
 if __name__ == '__main__':
