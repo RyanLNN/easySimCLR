@@ -30,7 +30,7 @@ def train(args):
     optimizer = torch.optim.Adam(model.fc.parameters(), lr=1e-3, weight_decay=1e-6)  # 优化器只对fc层的参数进行修改
 
     os.makedirs(config.save_path, exist_ok=True)
-    for epoch in range(args.max_epoch):
+    for epoch in range(args.max_epoch + 1):
         model.train()
         total_loss = 0
         for batch, (data, target) in enumerate(train_data):
