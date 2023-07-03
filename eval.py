@@ -63,7 +63,7 @@ def eval(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='test SimCLR')
-    parser.add_argument('--batch_size', default=512, type=int, help='')
+    parser.add_argument('--batch_size', default=128, type=int, help='')
 
     args = parser.parse_args()
     eval(args)

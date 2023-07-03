@@ -7,7 +7,7 @@ use_gpu = True
 gpu_name = 1
 
 pre_model = os.path.join('pth', 'model_stage1_epoch100.pth')
-pre_model_state2 = os.path.join('pth', 'model_stage2_epoch200.pth')  # 这个地方不太确定
+pre_model_state2 = os.path.join('pth', 'model_stage2_epoch200.pth')  # 第二阶段的训练成果
 
 save_path = "pth"
 
