@@ -57,7 +57,7 @@ def train(args):
             with torch.no_grad():
                 print("batch", " " * 1, "top1 acc", " " * 1, "top2 acc")
                 total_loss, total_correct_1, total_correct_2, total_num = 0.0, 0.0, 0.0, 0
-                for batch, (data, target) in enumerate(train_data):
+                for batch, (data, target) in enumerate(train_data):  # 其实eval过程中，应该使用验证集而不是训练集。
                     data, target = data.to(DEVICE), target.to(DEVICE)
                     pred = model(data)
 
